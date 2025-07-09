@@ -27,7 +27,12 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
     return nums1
 
 # Optimal Method (O(m+n) time complexity)
-def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+    """
+    Create identifiers of index values and lengths of given values. Then go through the second list and check index of first list to ensure you are within bounds. 
+    As you go through the list, evaluate values from list 1 against list 2 and continue moving backwards from there. Key point is you are starting at the back of the list and moving to the beginning.
+    Evaluate values at each index first and then go back a level.
+    """
     a, b, write_index = m-1, n-1, m + n - 1
 
     while b >= 0:
@@ -39,4 +44,5 @@ def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
             b -= 1
 
         write_index -= 1
+    return nums1
 
