@@ -1,5 +1,8 @@
 from typing import List
 def xmas_counter(data:List) -> int:
+    """
+    Go through each line to identify if xmas is formed in every direction
+    """
     match = 'XMAS'
     counter = 0
     for line in range(len(data)):
@@ -35,3 +38,26 @@ def xmas_counter(data:List) -> int:
                 if data[line][char] + data[line+1][char+1] + data[line+2][char+2] + data[line+3][char+3] == match:
                     counter += 1
     return counter
+
+def count_xmas_crosses(data):
+    """
+    Look for an A and then check to see if the diagonals form one of the combinations that forms mas
+    """
+    valid = {"MMSS", "MSSM", "SSMM", "SMMS"}
+    H, W = len(data), len(data[0])
+    count = 0
+
+    for line in range(1, H-1):
+      for char in range(1, W-1):
+        if data[line][char] == 'A':
+          # corners in leftup, rightup, rightdown, leftdown order
+          corners = (
+            data[line-1][char-1] +
+            data[line-1][char+1] +
+            data[line+1][char+1] +
+            data[line+1][char-1]
+          )
+          if corners in valid:
+            count += 1
+
+    return count
